@@ -20,15 +20,15 @@ export class Users {
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date = new Date();
 
-  @Column()
+  @Column({ nullable: true })
   emailVerified: Date;
 
-  @Column()
+  @Column({ nullable: true })
   interests: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 }
