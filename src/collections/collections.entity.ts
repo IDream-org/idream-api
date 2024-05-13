@@ -37,10 +37,10 @@ export class Collections {
   @Column({ type: 'jsonb', default: [] })
   users: CollectionUsers[];
 
-  @Column()
+  @Column({ nullable: true })
   categories: string;
 
-  @Column()
+  @Column('boolean', { default: true })
   private: boolean;
 
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

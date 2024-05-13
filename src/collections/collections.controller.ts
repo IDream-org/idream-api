@@ -14,6 +14,7 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { Users } from 'src/users/users.entity';
 import { GetUser } from 'src/users/get-user.decorator';
+import { Collections } from './collections.entity';
 
 @UseGuards(AuthGuard())
 @Controller('collections')
@@ -21,13 +22,16 @@ export class CollectionsController {
   constructor(private readonly collectionsService: CollectionsService) {}
 
   @Post()
-  create(@Body() createCollectionDto: CreateCollectionDto) {
-    return this.collectionsService.create(createCollectionDto);
+  create(
+    @GetUser() user: Users,
+    @Body() createCollectionDto: CreateCollectionDto,
+  ): Promise<Collections> {
+    return this.collectionsService.create(user, createCollectionDto);
   }
 
   @Get()
-  getUserCollections(@GetUser() user: Users) {
-    return this.collectionsService.getUserCollections(user.id);
+  get(@GetUser() user: Users): Promise<Collections[]> {
+    return this.collectionsService.getByUserId(user.id);
   }
 
   @Get(':id')

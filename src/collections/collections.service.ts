@@ -4,6 +4,7 @@ import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CollectionsRepository } from './collections.repository';
 import { Users } from 'src/users/users.entity';
+import { Collections } from './collections.entity';
 
 @Injectable()
 export class CollectionsService {
@@ -12,12 +13,18 @@ export class CollectionsService {
     private collectionsRepository: CollectionsRepository,
   ) {}
 
-  create(createCollectionDto: CreateCollectionDto) {
-    return 'This action adds a new collection';
+  create(
+    user: Users,
+    createCollectionDto: CreateCollectionDto,
+  ): Promise<Collections> {
+    return this.collectionsRepository.createCollection(
+      user,
+      createCollectionDto,
+    );
   }
 
-  getUserCollections(id: number) {
-    return this.collectionsRepository.getByUser(id);
+  getByUserId(id: number): Promise<Collections[]> {
+    return this.collectionsRepository.getByUserId(id);
   }
 
   findOne(id: number) {
