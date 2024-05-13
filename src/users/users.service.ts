@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './users.entity';
 import { UsersRepository } from './users.repository';
 import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
+import { CreateUserDto } from 'src/auth/dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -22,7 +23,7 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  async createUser(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    await this.usersRepository.createUser(authCredentialsDto);
+  async createUser(createUserDto: CreateUserDto): Promise<void> {
+    await this.usersRepository.createUser(createUserDto);
   }
 }

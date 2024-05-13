@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
 import { UsersService } from 'src/users/users.service';
+import { CreateUserDto } from './dto/create-user.dto';
 
 export class AuthService {
   constructor(
@@ -12,8 +13,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  public signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
-    return this.userService.createUser(authCredentialsDto);
+  public register(createUserDto: CreateUserDto): Promise<void> {
+    return this.userService.createUser(createUserDto);
   }
 
   public async signIn(
