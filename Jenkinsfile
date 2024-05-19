@@ -11,20 +11,6 @@ pipeline {
     }
     
     stages {
-        stage('Install Node.js and npm') {
-            steps {
-                // Install Node.js and npm if not already installed
-                sh '''
-                if ! type "node" > /dev/null; then
-                    echo "Installing Node.js and npm"
-                    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-                    sudo apt-get install -y nodejs
-                else
-                    echo "Node.js and npm are already installed"
-                fi
-                '''
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
